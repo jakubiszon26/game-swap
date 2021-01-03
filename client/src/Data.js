@@ -1,5 +1,4 @@
-//NIE ZMIENIAJ MI TEGO W JSON'A MA BYC OBIEKT JS
-const data = {
+ const Data = {
     offerts: [
         {
             id: 1,
@@ -7,7 +6,7 @@ const data = {
             description: "Jakaś gra nie wiem nie grałem ale polecam bo moja",
             category: "Fantasy",
             price: "CyberPRANK 2077",
-            pic: "wiedzmin.jpg"
+            pic: "/wiedzmin.jpg"
         },
         {
             id: 2,
@@ -15,9 +14,10 @@ const data = {
             description: "Samochodziki które sie zderzaja xD",
             category: "Arcade",
             price: "Wiedźmin 3",
-            pic: "rocket.jpg"
-        },
+            pic: "/rocket.jpg"
+        }
     ]
-};
+}
 
-export default data;
+export default Data;
+

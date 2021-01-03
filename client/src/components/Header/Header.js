@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 export default function Header(props){
     return(
-        <>
+        <div>
             <Menu inverted>
                 <Menu.Item>
                     <h1>GAME SWAP</h1>
@@ -16,6 +16,6 @@ export default function Header(props){
                     <Button  color="blue" content="Zaloguj się" style={{marginLeft: "5px"}}/>
                 </Menu.Item>
             </Menu>
-        </>
+        </div>
     )
 }

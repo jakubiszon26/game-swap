@@ -1,36 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "semantic-ui-react";
-import data from '../Data.js'
+import { Form, Button, Embed } from "semantic-ui-react";
+import Iframe from 'react-iframe'
+const Data = require("../Data.json")
 class CreateOffer extends React.Component {
   state = {
     title: "",
     description: "",
     price: "",
-    pic: "",
+    // pic: "",
     category: "",
     picEnabled: false,
     done: false,
   };
   handleSubmit = () =>{
-   const newId = data.offerts.length + 1;
-    data.offerts.push({
-        title: this.state.title,
-        description: this.state.description,
-        price: this.state.price,
-        pic: this.state.pic,
-        category: this.state.category,
-        id: newId
-        })
-        this.setState({
-            done: true
-        })
+    fetch(`http://192.168.0.38:5000/createOffer?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&pic=${this.state.pic}&category=${this.state.category}`)
+    this.setState({
+      done: true
+    })
   }
   handleChange = (e) => {
     if (e.target.type === "file") {
       this.setState({
-        [e.target.name]: URL.createObjectURL(e.target.files[0]),
-        picEnabled: true
+        // [e.target.name]: URL.createObjectURL(e.target.files[0]),
+        // picEnabled: true
       });
     } else {
       this.setState({
@@ -76,13 +69,13 @@ class CreateOffer extends React.Component {
         <label>
           <b>Zdjęcie twojej gry</b>
         </label>
-        <input
+        {/* <input
           name="pic"
           type="file"
           alt="your photo"
           accept="image/x-png,image/gif,image/jpeg"
           onChange={(e) => this.handleChange(e)}
-        ></input>
+        ></input> */}
         {this.state.picEnabled && <img src={this.state.pic} alt='' height="370px" width="290px" /> }
         <br /> <br />
        <Link to='/'><Button negative>Powrót</Button></Link> 

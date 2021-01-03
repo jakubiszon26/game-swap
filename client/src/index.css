@@ -12,7 +12,14 @@ code {
     monospace;
 }
 .cards{
-  display: inline-block;
+  display: flex;
   flex-wrap: wrap;
+}
+a{
+  color: black;
+  
+}
+a:hover{
+  transition: 1s;
 }
 
