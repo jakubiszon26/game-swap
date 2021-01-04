@@ -1,29 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Embed } from "semantic-ui-react";
-import Iframe from 'react-iframe'
-const Data = require("../Data.json")
+import axios from "axios";
+const Data = require("../Data.json");
 class CreateOffer extends React.Component {
   state = {
     title: "",
     description: "",
     price: "",
-    // pic: "",
+    pic: "",
     category: "",
     picEnabled: false,
     done: false,
+    id: null,
   };
-  handleSubmit = () =>{
-    fetch(`http://192.168.0.38:5000/createOffer?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&pic=${this.state.pic}&category=${this.state.category}`)
+  handleSubmit = () => {
+    const data = new FormData();
+    data.append("file", this.state.pic);
+    axios.post(`http://localhost:5000/upload`, data, {}).then((res) => {
+      console.log(res.statusText);
+    });
+    // fetch(
+    //   `http://localhost:5000/createOffer?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&pic=${this.state.pic}&category=${this.state.category}`
+    // );
     this.setState({
-      done: true
-    })
-  }
+      done: true,
+    });
+  };
   handleChange = (e) => {
     if (e.target.type === "file") {
+      console.log(e.target.files[0]);
       this.setState({
-        // [e.target.name]: URL.createObjectURL(e.target.files[0]),
-        // picEnabled: true
+        [e.target.name]: e.target.files[0],
       });
     } else {
       this.setState({
@@ -52,7 +60,9 @@ class CreateOffer extends React.Component {
           placeholder="napisz cos o tej grze i o stanie np płyty"
           onChange={(e) => this.handleChange(e)}
         />
-        <label><b>Kategoria</b></label>
+        <label>
+          <b>Kategoria</b>
+        </label>
         <input
           name="category"
           placeholder="np. Fantasy"
@@ -69,17 +79,22 @@ class CreateOffer extends React.Component {
         <label>
           <b>Zdjęcie twojej gry</b>
         </label>
-        {/* <input
+        <input
           name="pic"
           type="file"
-          alt="your photo"
           accept="image/x-png,image/gif,image/jpeg"
           onChange={(e) => this.handleChange(e)}
-        ></input> */}
-        {this.state.picEnabled && <img src={this.state.pic} alt='' height="370px" width="290px" /> }
+        ></input>
+        {this.state.picEnabled && (
+          <img src={this.state.pic} alt="" height="370px" width="290px" />
+        )}
         <br /> <br />
-       <Link to='/'><Button negative>Powrót</Button></Link> 
-       {!this.state.done && <Button positive type="submit" content="Dodaj ofertę"/>}
+        <Link to="/">
+          <Button negative>Powrót</Button>
+        </Link>
+        {!this.state.done && (
+          <Button positive type="submit" content="Dodaj ofertę" />
+        )}
       </Form>
     );
   }

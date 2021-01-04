@@ -1,28 +1,50 @@
-const express = require('express');
-const cors = require('cors');
-const Data = require("./client/src/Data.json")
+const express = require("express");
+const cors = require("cors");
+const Data = require("./client/src/Data.json");
+const multer = require("multer");
 const fs = require("fs");
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-app.get("/createOffer", function(req, res, next) {
-    
-  const newId = Data.offerts.length + 1;
-      Data.offerts.push({
-          title: req.query.title,
-          description: req.query.description,
-          price: req.query.price,
-          pic: "/cs.png",
-          category: req.query.category,
-          id: newId
-          });
-          fs.writeFileSync("./client/src/Data.json", JSON.stringify(Data));  
-          console.log(Data)  
-          return("ok")
-      //localhost:9000/createOffer?title=tytuł&description=opis&price=cena&pic=zdjęcie&category=kategoria
+app.use(cors())
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./client/public");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+let picName;
+var upload = multer({ storage: storage }).single("file");
+app.post("/upload", function (req, res) {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+    return res.status(200).send(req.file);
   });
+});
+app.get("/", (req, res) => {
+  res.send("game-swap server");
+});
+app.get("/createOffer", function (req, res, next) {
+  const newId = Data.offerts.length + 1;
+  Data.offerts.push({
+    title: req.query.title,
+    description: req.query.description,
+    price: req.query.price,
+    pic: picName,
+    category: req.query.category,
+    id: newId,
+  });
+  fs.writeFileSync("./client/src/Data.json", JSON.stringify(Data));
+  console.log(Data);
+  return Data;
+  //localhost:9000/createOffer?title=tytuł&description=opis&price=cena&pic=zdjęcie&category=kategoria
+});
 
 const port = 5000;
 
