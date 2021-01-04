@@ -4,9 +4,22 @@ const Data = require("./client/src/Data.json");
 const multer = require("multer");
 const fs = require("fs");
 const app = express();
-
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'jakub',
+  password: 'password',
+  database: 'game-swap'
+})
 app.use(cors());
+connection.connect()
+connection.query('INSERT INTO offerts (id, title, description, category, price, pic, contact) VALUES (1, "assasin", "fajna gra", "horror", "minecraft", "wiedzmin.jpg", "ja@wp.pl" )', function (err, rows, fields) {
+  if (err) throw err
 
+  console.log('The solution is: ', rows[0])
+})
+
+connection.end()
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./client/public");
