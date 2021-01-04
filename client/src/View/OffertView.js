@@ -10,12 +10,13 @@ console.log(offerData + "offerdata");
     <div>
       <Grid>
         <Grid.Column width={8}>
-            <img style={{borderColor: "black", border: "5px solid #555"}}src={offerData.pic}></img>
+            <img width="290px" height="370px" style={{borderColor: "black", border: "5px solid #555"}}src={`/${offerData.pic}`}></img>
         </Grid.Column>
         <Grid.Column width={8}>
             <h1>{offerData.title}</h1>
             <p>{offerData.description}</p>
             <h3>Kategoria: {offerData.category}</h3>
+            <h3>Wymiana za: {offerData.price}</h3>
 
           <Button positive content="Napisz do wymieniającego"></Button>
           <Link to='/'><Button negative>Powrót</Button></Link> 

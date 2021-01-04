@@ -17,7 +17,7 @@ class CreateOffer extends React.Component {
   handleSubmit = () => {
     const data = new FormData();
     data.append("file", this.state.pic);
-    axios.post(`http://localhost:5000/upload?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}`, data, {}).then((res) => {
+    axios.post(`http://192.168.1.98:5000/upload?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}`, data, {}).then((res) => {
       console.log(res.statusText);
     });
     // fetch(
