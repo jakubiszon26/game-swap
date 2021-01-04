@@ -8,7 +8,7 @@ export default function Offert(props) {
         <a href={`/offert/${props.id}`}>
           <Card width="100%" style={{ margin: 15 }}>
             <Card.Header>
-              <Image height="370px" width="290px" src={props.pic} />
+              <Image height="370px" width="290px" src={`/${props.pic}`} />
             </Card.Header>
             <Card.Description>
               <h3>{props.title}</h3>

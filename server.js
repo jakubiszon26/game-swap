@@ -5,7 +5,7 @@ const multer = require("multer");
 const fs = require("fs");
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -15,16 +15,26 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
-let picName;
 var upload = multer({ storage: storage }).single("file");
 app.post("/upload", function (req, res) {
+  let picName;
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);
     } else if (err) {
       return res.status(500).json(err);
     }
-    return res.status(200).send(req.file);
+    // return res.status(200).send(req.file);
+    const newId = Data.offerts.length + 1;
+    Data.offerts.push({
+      title: req.query.title,
+      description: req.query.description,
+      price: req.query.price,
+      pic: req.file.filename,
+      category: req.query.category,
+      id: newId,
+    });
+    fs.writeFileSync("./client/src/Data.json", JSON.stringify(Data));
   });
 });
 app.get("/", (req, res) => {
