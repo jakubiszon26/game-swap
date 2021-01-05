@@ -18,7 +18,7 @@ console.log(offerData + "offerdata");
             <h3>Kategoria: {offerData.category}</h3>
             <h3>Wymiana za: {offerData.price}</h3>
 
-            <a href="mailto:someone@yoursite.com"><Button positive content="Napisz do wymieniającego"></Button></a> 
+            <a href={`mailto: ${offerData.email}`}><Button positive content="Napisz do wymieniającego"></Button></a> 
           <Link to='/'><Button negative>Powrót</Button></Link> 
 
         </Grid.Column>
