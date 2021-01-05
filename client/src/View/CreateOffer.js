@@ -13,11 +13,12 @@ class CreateOffer extends React.Component {
     picEnabled: false,
     done: false,
     id: null,
+    email: "",
   };
   handleSubmit = () => {
     const data = new FormData();
     data.append("file", this.state.pic);
-    axios.post(`http://192.168.1.98:5000/upload?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}`, data, {}).then((res) => {
+    axios.post(`http://192.168.1.98:5000/upload?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}&email=${this.state.email}`, data, {}).then((res) => {
       console.log(res.statusText);
     });
     // fetch(
@@ -76,6 +77,8 @@ class CreateOffer extends React.Component {
           placeholder="tytuł gry"
           onChange={(e) => this.handleChange(e)}
         ></input>
+        <label><b>Adres email do kontaktu</b></label>
+        <input name="email" placeholder="np. jankowalski@gs.pl" onChange={e => this.handleChange(e)}></input>
         <label>
           <b>Zdjęcie twojej gry</b>
         </label>

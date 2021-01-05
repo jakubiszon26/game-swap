@@ -12,14 +12,7 @@ var connection = mysql.createConnection({
   database: 'game-swap'
 })
 app.use(cors());
-connection.connect()
-connection.query('INSERT INTO offerts (id, title, description, category, price, pic, contact) VALUES (1, "assasin", "fajna gra", "horror", "minecraft", "wiedzmin.jpg", "ja@wp.pl" )', function (err, rows, fields) {
-  if (err) throw err
 
-  console.log('The solution is: ', rows[0])
-})
-
-connection.end()
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./client/public");
@@ -45,6 +38,7 @@ app.post("/upload", function (req, res) {
       price: req.query.price,
       pic: req.file.filename,
       category: req.query.category,
+      email: req.query.email,
       id: newId,
     });
     fs.writeFileSync("./client/src/Data.json", JSON.stringify(Data));
@@ -53,21 +47,7 @@ app.post("/upload", function (req, res) {
 app.get("/", (req, res) => {
   res.send("game-swap server");
 });
-app.get("/createOffer", function (req, res, next) {
-  const newId = Data.offerts.length + 1;
-  Data.offerts.push({
-    title: req.query.title,
-    description: req.query.description,
-    price: req.query.price,
-    pic: picName,
-    category: req.query.category,
-    id: newId,
-  });
-  fs.writeFileSync("./client/src/Data.json", JSON.stringify(Data));
-  console.log(Data);
-  return Data;
-  //localhost:9000/createOffer?title=tytuł&description=opis&price=cena&pic=zdjęcie&category=kategoria
-});
+
 
 const port = 5000;
 
