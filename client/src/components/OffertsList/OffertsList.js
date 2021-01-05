@@ -1,7 +1,6 @@
 import React from "react";
 import Offert from "../Offert/Offert";
 import Slide from "react-reveal/Slide";
-const data = require("../../Data.js");
 export default function OffertsList(props) {
   return (
     <div className="cards">

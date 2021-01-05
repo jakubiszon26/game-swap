@@ -23,7 +23,7 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/" component={() => <OffertsList offers={this.state.offers} />} exact  />
-            <Route path="/offert/:id" component={OffertView} exact />
+            <Route path="/offert/:id" component={() => <OffertView offers={this.state.offers} />} exact />
             <Route path="/create-offer" component={CreateOffer} />
             <Route component={NotFound} />
           </Switch>
