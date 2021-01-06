@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
-import Slide from "react-reveal/Slide";
 
 export default function Offert(props) {
   return (

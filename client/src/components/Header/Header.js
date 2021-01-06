@@ -13,7 +13,7 @@ export default function Header(props){
                 </Menu.Item>
                 <Menu.Item position="right">
                     <Link to='/create-offer'><Button component={Link} to='/create-offer' positive content="Dodaj ofertę"/></Link>
-                    <Button  color="blue" content="Zaloguj się" style={{marginLeft: "5px"}}/>
+                    <Link to='/login'><Button  color="blue" content="Zaloguj się" style={{marginLeft: "5px"}}/></Link>
                 </Menu.Item>
             </Menu>
         </div>
