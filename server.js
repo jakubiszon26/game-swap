@@ -52,7 +52,21 @@ app.get("/getOffers", (req, res) => {
       var json = JSON.parse(myData);
       res.json(json);
 
-      console.log("ok");
+      console.log("getOffers -> ok");
+    }
+  );
+});
+app.get("/offerData", (req, res) => {
+  connection.query(
+    `SELECT * FROM offerts WHERE id=${req.query.id}
+  `,
+    function (err, rows, fields) {
+      if (err) throw err;
+      var myData = JSON.stringify(rows);
+      var json = JSON.parse(myData);
+      res.json(json);
+      console.log(json)
+      console.log("offerData -> ok");
     }
   );
 });

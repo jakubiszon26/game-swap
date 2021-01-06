@@ -9,21 +9,35 @@ import CreateOffer from "./View/CreateOffer";
 
 class App extends React.Component {
   state = {
-    offers: []
-  }
+    offers: [],
+  };
   componentDidMount = () => {
-    fetch('http://localhost:5000/getOffers')
-    .then(res => res.json())
-    .then(offers => this.setState({offers: offers}))
-  }
+    fetch("http://localhost:5000/getOffers")
+      .then((res) => res.json())
+      .then((offers) => this.setState({ offers: offers }));
+  };
+
   render() {
     return (
       <div>
         <Router>
           <Header />
           <Switch>
-            <Route path="/" component={() => <OffertsList offers={this.state.offers} />} exact  />
-            <Route path="/offert/:id" component={() => <OffertView offers={this.state.offers} />} exact />
+            <Route
+              path="/"
+              component={() => <OffertsList offers={this.state.offers} />}
+              exact
+            />
+            <Route
+              path="/offert/:id"
+              component={({ match }) => (
+                <OffertView
+                  offers={this.state.offers}
+                  paramsId={match.params.id}
+                />
+              )}
+              exact
+            />
             <Route path="/create-offer" component={CreateOffer} />
             <Route component={NotFound} />
           </Switch>
