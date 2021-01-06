@@ -11,18 +11,22 @@ import LogInForm from "./View/LogInForm";
 class App extends React.Component {
   state = {
     offers: [],
-    isLoged: false
+    isLoged: false,
+    userId: null,
   };
   componentDidMount = () => {
     fetch("http://localhost:5000/getOffers")
       .then((res) => res.json())
       .then((offers) => this.setState({ offers: offers }));
   };
-  changeLogin = (is) => {
-    this.setState({
-      isLoged: is
-    })
-  }
+  changeLogin = (is, id) => {
+    if (is == true) {
+      this.setState({
+        isLoged: is,
+        userId: id,
+      });
+    }
+  };
   render() {
     return (
       <div>
@@ -37,14 +41,15 @@ class App extends React.Component {
             <Route
               path="/offert/:id"
               component={({ match }) => (
-                <OffertView
-                  paramsId={match.params.id}
-                />
+                <OffertView paramsId={match.params.id} />
               )}
               exact
             />
             <Route path="/create-offer" component={CreateOffer} />
-            <Route path="/login" component={() => <LogInForm changeLogin={this.changeLogin} />} />
+            <Route
+              path="/login"
+              component={() => <LogInForm changeLogin={this.changeLogin} />}
+            />
             <Route component={NotFound} />
           </Switch>
         </Router>

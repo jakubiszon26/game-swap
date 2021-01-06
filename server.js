@@ -65,8 +65,27 @@ app.get("/offerData", (req, res) => {
       var myData = JSON.stringify(rows);
       var json = JSON.parse(myData);
       res.json(json);
-      console.log(json)
+      console.log(json);
       console.log("offerData -> ok");
+    }
+  );
+});
+
+app.get("/login", function (req, res, fields) {
+  connection.query(
+    `SELECT * FROM users WHERE password="${req.query.password}" AND name="${req.query.name}"`,
+    function (err, rows, results, fields) {
+      if (err) throw err;
+      if (rows != 0) {
+        var myData = JSON.stringify(rows[0]);
+        var userData = JSON.parse(myData);
+        var resData = { isLoged: true, userId: userData.id };
+        res.json(resData);
+        console.log("zalogowano");
+      } else {
+        res.json({ isLoged: false });
+        console.log("nie zalogowano");
+      }
     }
   );
 });
