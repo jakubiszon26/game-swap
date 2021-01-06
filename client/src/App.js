@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <div>
         <Router>
-          <Header />
+          <Header isLoged={this.props.isLoged} />
           <Switch>
             <Route
               path="/"
@@ -45,10 +45,10 @@ class App extends React.Component {
               )}
               exact
             />
-            <Route path="/create-offer" component={CreateOffer} />
+            <Route path="/create-offer" component={() => <CreateOffer isLoged={this.state.isLoged}/>} />
             <Route
               path="/login"
-              component={() => <LogInForm changeLogin={this.changeLogin} />}
+              component={() => <LogInForm changeLogin={this.changeLogin} isLoged={this.state.isLoged} />}
             />
             <Route component={NotFound} />
           </Switch>
