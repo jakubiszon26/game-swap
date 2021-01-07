@@ -3,8 +3,7 @@ import { Button, Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import cookie from "react-cookies";
 function handleLogOut(changeIsLogedOut) {
-  cookie.remove("userId", { path: "/" });
-  cookie.remove("isLoged", { path: "/" });
+  localStorage.clear()
 
   changeIsLogedOut(true);
   window.location.reload(true);

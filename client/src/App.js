@@ -23,8 +23,8 @@ class App extends React.Component {
       .then((res) => res.json())
       .then((offers) => this.setState({ offers: offers }));
 
-    const userId = cookie.load("userId");
-    const isLoged = cookie.load("isLoged");
+    const userId = localStorage.getItem("userId");
+    const isLoged = localStorage.getItem("isLoged");
     this.setState({
       userId: userId,
       isLoged: isLoged,
@@ -43,8 +43,8 @@ class App extends React.Component {
         userId: id,
         username: username
       });
-      cookie.save("userId", id, { path: "/" });
-      cookie.save("isLoged", is, { path: "/" });
+      localStorage.setItem("userId", id)
+      localStorage.setItem("isLoged", is)
     }
   };
   render() {
@@ -73,7 +73,7 @@ class App extends React.Component {
             />
             <Route
               path="/create-offer"
-              component={() => <CreateOffer isLoged={this.state.isLoged} />}
+              component={() => <CreateOffer userId={this.state.userId} isLoged={this.state.isLoged} />}
             />
             <Route
               path="/login"

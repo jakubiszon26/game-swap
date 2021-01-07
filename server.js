@@ -35,7 +35,7 @@ app.post("/uploadDB", function (req, res, fields) {
       return res.status(500).json(err);
     }
     connection.query(
-      `INSERT INTO offerts (title, description, category, price, pic, contact) VALUES ( "${req.query.title}", "${req.query.description}", "${req.query.category}", "${req.query.price}", "${req.file.filename}", "${req.query.email}")`,
+      `INSERT INTO offerts (title, description, category, price, pic, contact, user) VALUES ( "${req.query.title}", "${req.query.description}", "${req.query.category}", "${req.query.price}", "${req.file.filename}", "${req.query.email}", ${req.query.userId})`,
       function (err, rows, fields) {
         if (err) throw err;
         console.log("ok");
@@ -106,6 +106,22 @@ app.get("/getUserData", function (req, res, fields) {
           username: userData.name,
         };
         res.json(resData);
+      }
+    }
+  );
+});
+app.get("/getUserOffers", (req, res) => {
+  connection.query(
+    `SELECT * FROM offerts WHERE user=${req.query.id};
+  `,
+    function (err, rows, fields) {
+      if (err) throw err;
+      if (!rows == 0) {
+        console.log(rows);
+        var myData = JSON.stringify(rows);
+        var userOffers = JSON.parse(myData);
+        res.json(userOffers);
+        console.log("getUserOffers -> ok");
       }
     }
   );

@@ -19,16 +19,14 @@ class CreateOffer extends React.Component {
     data.append("file", this.state.pic);
     axios
       .post(
-        `http://192.168.1.98:5000/uploadDB?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}&email=${this.state.email}`,
+        `http://192.168.1.98:5000/uploadDB?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}&email=${this.state.email}&userId=${this.props.userId}`,
         data,
         {}
       )
       .then((res) => {
         console.log(res.statusText);
       });
-    // fetch(
-    //   `http://localhost:5000/createOffer?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&pic=${this.state.pic}&category=${this.state.category}`
-    // );
+    
     this.setState({
       done: true,
     });
