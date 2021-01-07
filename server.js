@@ -81,12 +81,31 @@ app.get("/login", function (req, res, fields) {
       if (rows != 0) {
         var myData = JSON.stringify(rows[0]);
         var userData = JSON.parse(myData);
-        var resData = { isLoged: true, userId: userData.id };
+        var resData = {
+          isLoged: true,
+          userId: userData.id,
+          userName: userData.name,
+        };
         res.json(resData);
         console.log("zalogowano");
       } else {
         res.json({ isLoged: false });
         console.log("nie zalogowano");
+      }
+    }
+  );
+});
+app.get("/getUserData", function (req, res, fields) {
+  connection.query(
+    `SELECT * FROM users WHERE id="${req.query.userId}"`,
+    function (err, rows, results, fields) {
+      if (!rows == 0) {
+        var myData = JSON.stringify(rows[0]);
+        var userData = JSON.parse(myData);
+        var resData = {
+          username: userData.name,
+        };
+        res.json(resData);
       }
     }
   );

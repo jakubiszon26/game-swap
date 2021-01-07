@@ -8,6 +8,7 @@ import NotFound from "./View/NotFound";
 import CreateOffer from "./View/CreateOffer";
 import LogInForm from "./View/LogInForm";
 import cookie from "react-cookies";
+import MyProfile from "./View/MyProfile";
 
 class App extends React.Component {
   state = {
@@ -15,6 +16,7 @@ class App extends React.Component {
     isLoged: false,
     userId: null,
     isLogedOut: false,
+    username: null,
   };
   componentDidMount = () => {
     fetch("http://localhost:5000/getOffers")
@@ -34,11 +36,12 @@ class App extends React.Component {
     });
   };
 
-  changeLogin = (is, id) => {
+  changeLogin = (is, id, username) => {
     if (is === true) {
       this.setState({
         isLoged: is,
         userId: id,
+        username: username
       });
       cookie.save("userId", id, { path: "/" });
       cookie.save("isLoged", is, { path: "/" });
@@ -80,6 +83,10 @@ class App extends React.Component {
                   isLoged={this.state.isLoged}
                 />
               )}
+            />
+            <Route
+              path="/my-profile"
+              component={() => <MyProfile userId={this.state.userId} />}
             />
             <Route component={NotFound} />
           </Switch>

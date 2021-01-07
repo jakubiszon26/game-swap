@@ -21,7 +21,7 @@ class LogInForm extends React.Component {
       .then((res) => res.json())
       .then((resData) =>
         this.setState({ resData }, () =>
-          this.props.changeLogin(resData.isLoged, resData.userId)
+          this.props.changeLogin(resData.isLoged, resData.userId, resData.userName)
         )
       );
   };
