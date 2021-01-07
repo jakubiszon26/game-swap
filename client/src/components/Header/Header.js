@@ -1,7 +1,11 @@
 import React from "react";
 import { Button, Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
+function handleLogOut(changeIsLogedOut) {
+  localStorage.clear();
+  changeIsLogedOut(true);
+  window.location.reload(true);
+}
 export default function Header(props) {
   return (
     <div>
@@ -18,7 +22,7 @@ export default function Header(props) {
               content="Dodaj ofertę"
             />
           </Link>
-          {!props.isLoged && (
+          {!props.isLoged ? (
             <Link to="/login">
               <Button
                 color="blue"
@@ -26,6 +30,12 @@ export default function Header(props) {
                 style={{ marginLeft: "5px" }}
               />
             </Link>
+          ) : (
+            <Button
+              content="wyloguj"
+              negative
+              onClick={() => handleLogOut(props.changeIsLogedOut)}
+            />
           )}
         </Menu.Item>
       </Menu>

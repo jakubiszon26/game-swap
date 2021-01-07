@@ -19,10 +19,10 @@ export default class OffertView extends React.Component {
     return (
       <div>
         <Grid>
-          <Grid.Column width="6">
+          <Grid.Column width="8">
             <img src={`/${data.pic}`} alt={data.pic} width="600" height="726" />
           </Grid.Column>
-          <Grid.Column width="6">
+          <Grid.Column width="8">
             <Segment>
               <h1>{data.title}</h1>
               <p>{data.description}</p>

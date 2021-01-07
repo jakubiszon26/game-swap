@@ -13,25 +13,45 @@ class App extends React.Component {
     offers: [],
     isLoged: false,
     userId: null,
+    isLogedOut: false
   };
   componentDidMount = () => {
     fetch("http://localhost:5000/getOffers")
       .then((res) => res.json())
       .then((offers) => this.setState({ offers: offers }));
+
+    const userId = localStorage.getItem("userId");
+    const isLoged = localStorage.getItem("isLoged");
+    this.setState({
+      userId: userId,
+      isLoged: isLoged,
+    });
   };
+  changeIsLogedOut = (is) => {
+    this.setState({
+      isLogedOut: is
+    })
+  }
+
+  
   changeLogin = (is, id) => {
-    if (is == true) {
+    if (is === true) {
       this.setState({
         isLoged: is,
         userId: id,
       });
+      localStorage.setItem("isLoged", is);
+      localStorage.setItem("userId", id);
     }
   };
   render() {
+    if (this.state.isLogedOut === true ){
+      alert("wylogowano")
+    }
     return (
       <div>
         <Router>
-          <Header isLoged={this.props.isLoged} />
+          <Header isLoged={this.state.isLoged} changeIsLogedOut={this.changeIsLogedOut}  />
           <Switch>
             <Route
               path="/"
@@ -45,10 +65,18 @@ class App extends React.Component {
               )}
               exact
             />
-            <Route path="/create-offer" component={() => <CreateOffer isLoged={this.state.isLoged}/>} />
+            <Route
+              path="/create-offer"
+              component={() => <CreateOffer isLoged={this.state.isLoged} />}
+            />
             <Route
               path="/login"
-              component={() => <LogInForm changeLogin={this.changeLogin} isLoged={this.state.isLoged} />}
+              component={() => (
+                <LogInForm
+                  changeLogin={this.changeLogin}
+                  isLoged={this.state.isLoged}
+                />
+              )}
             />
             <Route component={NotFound} />
           </Switch>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Segment, Input, Label, Grid } from "semantic-ui-react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 class LogInForm extends React.Component {
   state = {
     login: "",
@@ -33,7 +33,9 @@ class LogInForm extends React.Component {
           <Segment>
             <h1>Witaj ponownie</h1>
             <br />
-           <Link to="/"><Button negative content="powrot"/></Link> 
+            <Link to="/">
+              <Button negative content="powrot" />
+            </Link>
           </Segment>
         ) : (
           <Segment className="login">
@@ -62,7 +64,9 @@ class LogInForm extends React.Component {
                       <Button type="submit" positive>
                         Zaloguj
                       </Button>
-                     <Link to="/"><Button negative>Powrót</Button></Link> 
+                      <Link to="/">
+                        <Button negative>Powrót</Button>
+                      </Link>
                     </Form>
                   </div>
                 </Grid.Column>
