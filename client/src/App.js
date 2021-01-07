@@ -7,21 +7,22 @@ import Footer from "./components/Footer/Footer";
 import NotFound from "./View/NotFound";
 import CreateOffer from "./View/CreateOffer";
 import LogInForm from "./View/LogInForm";
+import cookie from "react-cookies";
 
 class App extends React.Component {
   state = {
     offers: [],
     isLoged: false,
     userId: null,
-    isLogedOut: false
+    isLogedOut: false,
   };
   componentDidMount = () => {
     fetch("http://localhost:5000/getOffers")
       .then((res) => res.json())
       .then((offers) => this.setState({ offers: offers }));
 
-    const userId = localStorage.getItem("userId");
-    const isLoged = localStorage.getItem("isLoged");
+    const userId = cookie.load("userId");
+    const isLoged = cookie.load("isLoged");
     this.setState({
       userId: userId,
       isLoged: isLoged,
@@ -29,29 +30,31 @@ class App extends React.Component {
   };
   changeIsLogedOut = (is) => {
     this.setState({
-      isLogedOut: is
-    })
-  }
+      isLogedOut: is,
+    });
+  };
 
-  
   changeLogin = (is, id) => {
     if (is === true) {
       this.setState({
         isLoged: is,
         userId: id,
       });
-      localStorage.setItem("isLoged", is);
-      localStorage.setItem("userId", id);
+      cookie.save("userId", id, { path: "/" });
+      cookie.save("isLoged", is, { path: "/" });
     }
   };
   render() {
-    if (this.state.isLogedOut === true ){
-      alert("wylogowano")
+    if (this.state.isLogedOut === true) {
+      alert("wylogowano");
     }
     return (
       <div>
         <Router>
-          <Header isLoged={this.state.isLoged} changeIsLogedOut={this.changeIsLogedOut}  />
+          <Header
+            isLoged={this.state.isLoged}
+            changeIsLogedOut={this.changeIsLogedOut}
+          />
           <Switch>
             <Route
               path="/"

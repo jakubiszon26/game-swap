@@ -5,6 +5,7 @@ const multer = require("multer");
 const fs = require("fs");
 const app = express();
 var mysql = require("mysql");
+const cookieParser = require("cookie-parser");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "jakub",
@@ -13,6 +14,7 @@ var connection = mysql.createConnection({
 });
 
 app.use(cors());
+app.use(cookieParser());
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
