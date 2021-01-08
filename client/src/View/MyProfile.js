@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import Offert from './../components/Offert/Offert'
+import Offert from "./../components/Offert/Offert";
 
 class MyProfile extends React.Component {
   state = {
@@ -30,18 +30,21 @@ class MyProfile extends React.Component {
         <Segment>
           <h1>Witaj {this.state.username}!</h1>
           <h2>Twoje oferty: </h2>
-          <div className="cards">
-            {this.state.isOffers && this.state.offers.map((item) => (
-                <Offert
-                  key={item.id}
-                  id={item.id}
-                  description={item.description}
-                  pic={item.pic}
-                  price={item.price}
-                  title={item.title}
-                />
-            ))}
-          </div>
+          <Segment>
+            <div className="cards">
+              {this.state.isOffers &&
+                this.state.offers.map((item) => (
+                  <Offert
+                    key={item.id}
+                    id={item.id}
+                    description={item.description}
+                    pic={item.pic}
+                    price={item.price}
+                    title={item.title}
+                  />
+                ))}
+            </div>
+          </Segment>
         </Segment>
         <Link to="/">
           <Button negative>Powrót</Button>

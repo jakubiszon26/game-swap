@@ -6,8 +6,17 @@ class LogInForm extends React.Component {
     login: "",
     password: "",
     resData: null,
+    registerLogin: "",
+    registerPassword: "",
   };
-
+  handleRegister = () => {
+    fetch(
+      `http://localhost:5000/register?name=${this.state.registerLogin}&password="${this.state.registerPassword}"`
+    )
+      .then((res) => res.json())
+      .then((resText) => alert(resText.resText));
+    window.location.reload(true);
+  };
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -21,7 +30,11 @@ class LogInForm extends React.Component {
       .then((res) => res.json())
       .then((resData) =>
         this.setState({ resData }, () =>
-          this.props.changeLogin(resData.isLoged, resData.userId, resData.userName)
+          this.props.changeLogin(
+            resData.isLoged,
+            resData.userId,
+            resData.userName
+          )
         )
       );
   };
@@ -77,13 +90,21 @@ class LogInForm extends React.Component {
                 >
                   <div style={{ float: "left" }}>
                     <h2>Rejestracja</h2>
-                    <Form>
+                    <Form onSubmit={this.handleRegister}>
                       <Label>Nowy login: </Label>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="registerLogin"
+                        onChange={(e) => this.handleChange(e)}
+                      />
                       <br />
                       <br />
                       <Label>Nowe hasło</Label>
-                      <Input type="password" />
+                      <Input
+                        type="password"
+                        name="registerPassword"
+                        onChange={(e) => this.handleChange(e)}
+                      />
                       <br /> <br />
                       <Button type="submit" color="blue">
                         zarejestruj się

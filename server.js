@@ -99,7 +99,7 @@ app.get("/getUserData", function (req, res, fields) {
   connection.query(
     `SELECT * FROM users WHERE id="${req.query.userId}"`,
     function (err, rows, results, fields) {
-      if (!rows == 0) {
+      if (rows != 0) {
         var myData = JSON.stringify(rows[0]);
         var userData = JSON.parse(myData);
         var resData = {
@@ -116,12 +116,36 @@ app.get("/getUserOffers", (req, res) => {
   `,
     function (err, rows, fields) {
       if (err) throw err;
-      if (!rows == 0) {
+      if (rows != 0) {
         console.log(rows);
         var myData = JSON.stringify(rows);
         var userOffers = JSON.parse(myData);
         res.json(userOffers);
         console.log("getUserOffers -> ok");
+      }
+    }
+  );
+});
+
+app.get("/register", (req, res) => {
+  connection.query(
+    `SELECT * FROM users WHERE name="${req.query.name}"
+  `,
+    function (err, rows, fields) {
+      if (err) throw err;
+      if (rows != 0) {
+        console.log("istnieje juz uzytkownik o takiej nazwie");
+        let resText = { resText: "Istnieje już użytkownik o takiej nazwie" };
+        res.json(resText);
+      } else if (rows == 0) {
+        connection.query(
+          `INSERT INTO users (name, password) VALUES ("${req.query.name}", ${req.query.password})`,
+          function (err) {
+            if (err) throw err;
+            resText = { resText: "Pomyślnie utworzono użytkownika, Możesz się teraz zalogować" };
+            res.json(resText);
+          }
+        );
       }
     }
   );
