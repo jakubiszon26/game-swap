@@ -10,14 +10,14 @@ Please do not use this project commercially without any changes for user auth. t
 You need node.js version 12 or higher.
 First setup MySql data base, you can find .sql file in project root directory.
 When you have working MySql do these steps:
-'''sh
+```sh
 $ cd game-swap
 $ npm install
 $ cd client
 $ npm install
 $ cd ../
 $ npm run dev
-'''
+```
 
 ### Technologies
 I used:
