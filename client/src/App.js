@@ -9,6 +9,7 @@ import CreateOffer from "./View/CreateOffer";
 import LogInForm from "./View/LogInForm";
 import cookie from "react-cookies";
 import MyProfile from "./View/MyProfile";
+import Search from "./components/Search/Search";
 
 class App extends React.Component {
   state = {
@@ -61,13 +62,13 @@ class App extends React.Component {
           <Switch>
             <Route
               path="/"
-              component={() => <OffertsList offers={this.state.offers} />}
+              component={() => <OffertsList userId={this.state.userId} offers={this.state.offers} />}
               exact
             />
             <Route
               path="/offert/:id"
               component={({ match }) => (
-                <OffertView paramsId={match.params.id} />
+                <OffertView userId={this.state.userId} paramsId={match.params.id} />
               )}
               exact
             />

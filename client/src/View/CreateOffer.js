@@ -19,7 +19,7 @@ class CreateOffer extends React.Component {
     data.append("file", this.state.pic);
     axios
       .post(
-        `http://192.168.1.98:5000/uploadDB?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}&email=${this.state.email}&userId=${this.props.userId}`,
+        `http://localhost:5000/uploadDB?title=${this.state.title}&description=${this.state.description}&price=${this.state.price}&category=${this.state.category}&email=${this.state.email}&userId=${this.props.userId}`,
         data,
         {}
       )

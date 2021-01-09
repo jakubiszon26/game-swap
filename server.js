@@ -45,7 +45,7 @@ app.post("/uploadDB", function (req, res, fields) {
 });
 app.get("/getOffers", (req, res) => {
   connection.query(
-    `select * from offerts order by id desc limit 30;
+    `select * from offerts order by id desc
   `,
     function (err, rows, fields) {
       if (err) throw err;
@@ -142,7 +142,10 @@ app.get("/register", (req, res) => {
           `INSERT INTO users (name, password) VALUES ("${req.query.name}", ${req.query.password})`,
           function (err) {
             if (err) throw err;
-            resText = { resText: "Pomyślnie utworzono użytkownika, Możesz się teraz zalogować" };
+            resText = {
+              resText:
+                "Pomyślnie utworzono użytkownika, Możesz się teraz zalogować",
+            };
             res.json(resText);
           }
         );
@@ -150,7 +153,14 @@ app.get("/register", (req, res) => {
     }
   );
 });
-
+app.get("/deleteOffer", (req, res) => {
+  connection.query(
+    `DELETE FROM offerts WHERE user=${req.query.id}`,
+    function (err, rows, fields) {
+      if (err) throw err;
+    }
+  );
+});
 const port = 5000;
 
 app.listen(port, () => `Server running on port ${port}`);
