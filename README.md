@@ -3,8 +3,9 @@ Game Swap is project of internet portal for exchanging games.
 I have started this project in purpose to test my react skills after I learned its basics.
 I was starting without any knowledge about back-end technologies but when project was getting bigger i needed backend. I chose express.js. This React and Express code may be a mess because it's my first that big project, But i'm happy with result for now:
 
+
 ## Warning!
-Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I have not that much knowledge
+Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I dont have that much knowledge
 
 ### How to run it
 You need node.js version 12 or higher.
@@ -18,6 +19,18 @@ $ npm install
 $ cd ../
 $ npm run dev
 ```
+## Presentation
+#### Login
+![Login](demo/login.gif)
+#### Creating offer
+![Create offer](demo/createOffer.gif)
+
+#### Sign Up
+![Sign Up](demo/signUp.gif)
+#### Offer View
+![Offer View](demo/offerView.gif)
+
+
 
 ### Technologies
 I used:
