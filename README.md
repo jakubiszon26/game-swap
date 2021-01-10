@@ -5,7 +5,11 @@ I was starting without any knowledge about back-end technologies but when projec
 
 
 ## Warning!
+<<<<<<< HEAD
 Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I dont have that much knowledge
+=======
+Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I Dont have that much knowledge
+>>>>>>> e65a1353230a9e749dc37d04f7a7bce5c41bb166
 
 ### How to run it
 You need node.js version 12 or higher.
