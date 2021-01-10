@@ -3,14 +3,9 @@ Game Swap is project of internet portal for exchanging games.
 I have started this project in purpose to test my react skills after I learned its basics.
 I was starting without any knowledge about back-end technologies but when project was getting bigger i needed backend. I chose express.js. This React and Express code may be a mess because it's my first that big project, But i'm happy with result for now:
 
-
+`
 ## Warning!
-<<<<<<< HEAD
 Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I dont have that much knowledge
-=======
-Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I Dont have that much knowledge
->>>>>>> e65a1353230a9e749dc37d04f7a7bce5c41bb166
-
 ### How to run it
 You need node.js version 12 or higher.
 First setup MySql data base, you can find .sql file in project root directory.
