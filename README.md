@@ -1,4 +1,5 @@
 # Game Swap
+[![Project Status: Suspended – Initial development has started, but there has not yet been a stable, usable release; work has been stopped for the time being but the author(s) intend on resuming work.](https://www.repostatus.org/badges/latest/suspended.svg)](https://www.repostatus.org/#suspended)
 Game Swap is project of internet portal for exchanging games.
 I have started this project in purpose to test my react skills after I learned its basics.
 I was starting without any knowledge about back-end technologies but when project was getting bigger i needed backend. I chose express.js. This React and Express code may be a mess because it's my first that big project, But i'm happy with result for now:
