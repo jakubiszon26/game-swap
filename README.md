@@ -7,7 +7,7 @@ I was starting without any knowledge about back-end technologies but when projec
 Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I dont have that much knowledge
 ### How to run it
 You need node.js version 12 or higher.
-First setup MySql data base, you can find .sql file in project root directory.
+First setup MySql data base, you can find .sql file in project root directory and database config on top of the server.js file
 When you have working MySql do these steps:
 ```sh
 $ cd game-swap
