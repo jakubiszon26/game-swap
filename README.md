@@ -33,6 +33,7 @@ $ npm run dev
 
 ### Technologies
 I used:
+819 javascript lines of code,
 Semantic UI react - https://react.semantic-ui.com/
 React Express starter - https://github.com/bradtraversy/react_express_starter
 React JS - https://pl.reactjs.org/
