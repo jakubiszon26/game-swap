@@ -8,7 +8,7 @@ I was starting without any knowledge about back-end technologies but when projec
 Please do not use this project commercially without any changes for user auth. there is no security for it. I can't do it for now because I dont have that much knowledge
 ### How to run it
 You need node.js version 12 or higher.
-First setup MySql data base, you can find .sql file in project root directory and database config on top of the server.js file
+First setup MySql data base, you can find game-swap.sql file in project root directory (if it's not working try with game-swap2.sql) and database config on top of the server.js file
 When you have working MySql do these steps:
 ```sh
 $ cd game-swap
@@ -33,6 +33,7 @@ $ npm run dev
 
 ### Technologies
 I used:
+819 javascript lines of code,
 Semantic UI react - https://react.semantic-ui.com/
 React Express starter - https://github.com/bradtraversy/react_express_starter
 React JS - https://pl.reactjs.org/
