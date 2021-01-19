@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "jakub",
   password: "password",
-  database: "game-swap",
+  database: "game_swap",
 });
 
 app.use(cors());

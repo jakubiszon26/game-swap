@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `offerts` (
   `id` int NOT NULL,
-  `title` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `description` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `category` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `price` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `pic` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `contact` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
+  `title` text  NOT NULL,
+  `description` text NOT NULL,
+  `category` text NOT NULL,
+  `price` text NOT NULL,
+  `pic` text NOT NULL,
+  `contact` text NOT NULL,
   `user` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_pl_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Zrzut danych tabeli `offerts`
@@ -59,9 +59,9 @@ INSERT INTO `offerts` (`id`, `title`, `description`, `category`, `price`, `pic`,
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `name` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL,
-  `password` text COLLATE utf8mb4_pl_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_pl_0900_ai_ci;
+  `name` text NOT NULL,
+  `password` text NOT NULL
+) ENGINE=InnoDB;
 
 --
 -- Zrzut danych tabeli `users`
