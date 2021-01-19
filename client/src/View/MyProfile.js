@@ -2,19 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Button, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Offert from "./../components/Offert/Offert";
-import {useAuth0} from '@auth0/auth0-react'
-
+import { useAuth0 } from "@auth0/auth0-react";
+import Auth0LoginButton from "../components/Auth0LoginButton/Auth0LoginButton";
 
 export default function MyProfile() {
   const { user, isAuthenticated } = useAuth0();
-  const { state, setState } = useState({
+  const [state, setState] = useState({
     offers: null,
     isOffers: false,
-    test: "test"
+    test: "test",
   });
-
+  if (!isAuthenticated) {
+    return (
+      <div style={{textAlign: "center"}}>
+    <h1>Musisz się zalogować</h1>
+    <Auth0LoginButton />
+    </div>
+    )
+  }
+  
   useEffect(() => {
-    fetch(`http://localhost:5000/getUserOffers?id=${user.identities.user_id}`)
+    fetch(`http://localhost:5000/getUserOffers?id=${user.user_id}`)
       .then((res) => res.json())
       .then((userOffers) =>
         setState({ offers: userOffers, isOffers: true })
@@ -23,7 +31,9 @@ export default function MyProfile() {
   return (
     <React.Fragment>
       <Segment>
-        <h1>Witaj {user.name}!</h1>
+        <h1>
+          Witaj {user.name}!
+        </h1>
         <h2>Twoje oferty: </h2>
         {/* <Segment>
           <div className="cards">
