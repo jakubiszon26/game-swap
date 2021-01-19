@@ -1,21 +1,19 @@
 import React from "react";
 import { Button, Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import Auth0LogoutButton from "../Auth0LogoutButton/Auth0LogoutButton";
+import Auth0LoginButton from "../Auth0LoginButton/Auth0LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
 import cookie from "react-cookies";
-function handleLogOut(changeIsLogedOut) {
-  localStorage.clear()
-
-  changeIsLogedOut(true);
-  window.location.reload(true);
-}
 export default function Header(props) {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   return (
     <div>
       <Menu inverted>
         <Menu.Item>
           <h1>
-            <span style={{color: "red"}}>GAME </span>
-            <span style={{color: "white"}}>SWAP</span>
+            <span style={{ color: "red" }}>GAME </span>
+            <span style={{ color: "white" }}>SWAP</span>
           </h1>
         </Menu.Item>
         <Menu.Item position="right">
@@ -25,15 +23,10 @@ export default function Header(props) {
               Dodaj ofertę
             </Button>
           </Link>
-          {!props.isLoged && (
-            <Link to="/login">
-              <Button color="blue" style={{ marginLeft: "5px" }}>
-                <Icon name="sign in" />
-                Zaloguj się
-              </Button>
-            </Link>
+          {!isAuthenticated && (
+            <Auth0LoginButton />
           )}
-          {props.isLoged && (
+          {isAuthenticated && (
             <Link to="/my-profile">
               <Button color="blue">
                 <Icon name="user" />
@@ -41,13 +34,7 @@ export default function Header(props) {
               </Button>
             </Link>
           )}
-          {props.isLoged && (
-            <Button
-              
-              negative
-              onClick={() => handleLogOut(props.changeIsLogedOut)}
-            ><Icon name="sign out"/>Wyloguj</Button>
-          )}
+          {isAuthenticated && <Auth0LogoutButton />}
         </Menu.Item>
       </Menu>
     </div>
