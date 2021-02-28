@@ -17,17 +17,16 @@ app.use(cors());
 app.use(cookieParser());
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function (cb) {
     cb(null, "./client/public");
   },
-  filename: function (req, file, cb) {
+  filename: function (file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
 var upload = multer({ storage: storage }).single("file");
 
-app.post("/uploadDB", function (req, res, fields) {
-  let picName;
+app.post("/uploadDB", function (req, res) {
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);
@@ -36,18 +35,18 @@ app.post("/uploadDB", function (req, res, fields) {
     }
     connection.query(
       `INSERT INTO offerts (title, description, category, price, pic, contact, user) VALUES ( "${req.query.title}", "${req.query.description}", "${req.query.category}", "${req.query.price}", "${req.file.filename}", "${req.query.email}", ${req.query.userId})`,
-      function (err, rows, fields) {
+      function (err) {
         if (err) throw err;
         console.log("ok");
       }
     );
   });
 });
-app.get("/getOffers", (req, res) => {
+app.get("/getOffers", (res) => {
   connection.query(
     `select * from offerts order by id desc
   `,
-    function (err, rows, fields) {
+    function (err, rows) {
       if (err) throw err;
       console.log(rows);
       var myData = JSON.stringify(rows);
@@ -62,7 +61,7 @@ app.get("/offerData", (req, res) => {
   connection.query(
     `SELECT * FROM offerts WHERE id=${req.query.id}
   `,
-    function (err, rows, fields) {
+    function (err, rows) {
       if (err) throw err;
       var myData = JSON.stringify(rows);
       var json = JSON.parse(myData);
@@ -73,10 +72,10 @@ app.get("/offerData", (req, res) => {
   );
 });
 
-app.get("/login", function (req, res, fields) {
+app.get("/login", function (req, res) {
   connection.query(
     `SELECT * FROM users WHERE password="${req.query.password}" AND name="${req.query.name}"`,
-    function (err, rows, results, fields) {
+    function (err, rows) {
       if (err) throw err;
       if (rows != 0) {
         var myData = JSON.stringify(rows[0]);
@@ -95,10 +94,10 @@ app.get("/login", function (req, res, fields) {
     }
   );
 });
-app.get("/getUserData", function (req, res, fields) {
+app.get("/getUserData", function (req, res) {
   connection.query(
     `SELECT * FROM users WHERE id="${req.query.userId}"`,
-    function (err, rows, results, fields) {
+    function (rows) {
       if (rows != 0) {
         var myData = JSON.stringify(rows[0]);
         var userData = JSON.parse(myData);
@@ -114,7 +113,7 @@ app.get("/getUserOffers", (req, res) => {
   connection.query(
     `SELECT * FROM offerts WHERE user=${req.query.id};
   `,
-    function (err, rows, fields) {
+    function (err, rows) {
       if (err) throw err;
       if (rows != 0) {
         console.log(rows);
@@ -131,7 +130,7 @@ app.get("/register", (req, res) => {
   connection.query(
     `SELECT * FROM users WHERE name="${req.query.name}"
   `,
-    function (err, rows, fields) {
+    function (err, rows) {
       if (err) throw err;
       if (rows != 0) {
         console.log("istnieje juz uzytkownik o takiej nazwie");
@@ -153,10 +152,10 @@ app.get("/register", (req, res) => {
     }
   );
 });
-app.get("/deleteOffer", (req, res) => {
+app.get("/deleteOffer", (req) => {
   connection.query(
     `DELETE FROM offerts WHERE user=${req.query.id}`,
-    function (err, rows, fields) {
+    function (err) {
       if (err) throw err;
     }
   );
