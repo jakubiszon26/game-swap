@@ -6,7 +6,7 @@ const fs = require("fs");
 const app = express();
 var mysql = require("mysql");
 const cookieParser = require("cookie-parser");
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
   user: "jakub",
   password: "password",
